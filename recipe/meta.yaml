@@ -7,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/fancyimpute-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/fancyimpute-{{ version }}.tar.gz
   sha256: 76a6919e67ed3ef3364328a6636c86325ca2c9073c40c79df455db12b4285fc9
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: 
     - {{ PYTHON }} -m pip install . -vv
@@ -19,9 +19,9 @@ build:
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - cvxopt
     - cvxpy
     - knnimpute >=0.1.0
@@ -36,6 +36,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/iskandr/fancyimpute
